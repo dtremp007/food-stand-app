@@ -25,12 +25,12 @@
 	export let data: PageData;
 
 	function getFoodItems() {
-		let foodItems = browser ? cacheUtil.get('foodItems') : null;
-		if (!foodItems) {
-			foodItems = data.foodItems || DEFAULT_FOOD_ITEMS;
-			if (browser) cacheUtil.set('foodItems', foodItems);
+		let foodItems = data.foodItems;
+		if (!foodItems && browser) {
+			foodItems = cacheUtil.get('foodItems') || DEFAULT_FOOD_ITEMS;
 		}
-		return foodItems;
+		if (browser) cacheUtil.set('foodItems', foodItems!);
+		return foodItems!;
 	}
 
 	function getRestaurantData() {
@@ -62,6 +62,10 @@
 	let currentOrder = getCurrentOrder();
 	let sum = 0;
 
+	function getOrderById(id: string) {
+		return browser ? cacheUtil.get(id) : null;
+	}
+
 	function updateCurrentOrder(foodItem: string, count: number, price: number) {
 		sum += price * count;
 		const index = currentOrder.foodItems.findIndex(([name]) => name === foodItem);
@@ -81,14 +85,16 @@
 		cacheUtil.set(currentOrder.id, currentOrder);
 	}
 
-	function onSubmit() {
+	function onSubmit(direction: 'next' | 'previous' = 'next') {
 		saveOrder();
 		sum = 0;
-		currentOrder = {
+		const id = (+currentOrder.id + (direction === 'next' ? 1 : -1)).toString();
+		let nextOrder = getOrderById(id) || {
 			id: (+currentOrder.id + 1).toString(),
 			foodItems: [],
 			total: 0
 		};
+        currentOrder = nextOrder;
 	}
 
 	function getQuantity(foodItem: string) {
@@ -107,9 +113,21 @@
 	</div>
 {:else}
 	<div class="flex justify-between">
-		<button> Previous Order </button>
+		<button
+			on:click={() => {
+				onSubmit('previous');
+			}}
+		>
+			Previous Order
+		</button>
 		<h1>{currentOrder.id}</h1>
-        <button> Next Order </button>
+		<button
+			on:click={() => {
+				onSubmit('next');
+			}}
+		>
+			Next Order
+		</button>
 	</div>
 	<div>
 		<div class="food-items">
@@ -127,7 +145,7 @@
 			{/each}
 		</div>
 		<div class="accumulate">
-			<button type="submit" on:click={onSubmit}>Submit</button>
+			<button type="submit" on:click={() => onSubmit('next')}>Submit</button>
 			<h1>Total:</h1>
 			<input type="number" step="any" name="total" value={sum} class="hidden" />
 			<h1 class="price-total">
@@ -165,12 +183,12 @@
 		display: none;
 		user-select: none;
 	}
-    .flex {
-        display: flex;
-    }
-    .justify-between {
-        justify-content: space-between;
-    }
+	.flex {
+		display: flex;
+	}
+	.justify-between {
+		justify-content: space-between;
+	}
 
 	/* CSS */
 	button {
