@@ -46,7 +46,7 @@
 	}
 
 	.counter button {
-		width: 2em;
+		width: 1.5em;
 		padding: 0;
 		display: flex;
 		align-items: center;
@@ -73,7 +73,7 @@
 	}
 
 	.counter-viewport {
-		width: 8em;
+		width: 3.5em;
 		height: 4em;
 		overflow: hidden;
 		text-align: center;
@@ -87,7 +87,7 @@
 		height: 100%;
 		font-weight: 400;
 		color: var(--color-theme-1);
-		font-size: 4rem;
+		font-size: 3rem;
 		align-items: center;
 		justify-content: center;
 	}

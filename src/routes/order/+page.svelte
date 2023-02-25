@@ -94,7 +94,7 @@
 			foodItems: [],
 			total: 0
 		};
-        currentOrder = nextOrder;
+		currentOrder = nextOrder;
 	}
 
 	function getQuantity(foodItem: string) {
@@ -165,7 +165,15 @@
 	.price {
 		font-size: 2rem;
 		margin-left: auto;
-		margin-right: 1rem;
+		margin-right: 0.5rem;
+        color: green;
+        font-weight: 500;
+	}
+	@media (max-width: 600px) {
+		h1,
+		.price {
+			font-size: 1.5rem;
+		}
 	}
 
 	.accumulate {
