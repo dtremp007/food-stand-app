@@ -51,11 +51,7 @@
 
 	function getCurrentOrder() {
 		const lastOrder = getRestaurantData().lastOrder;
-		return {
-			id: (+lastOrder.id + 1).toString(),
-			foodItems: [] as [FoodItem['name'], number][],
-			total: 0
-		};
+		return lastOrder;
 	}
 
 	let foodItems = getFoodItems();
