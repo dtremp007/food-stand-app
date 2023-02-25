@@ -60,7 +60,7 @@
 
 	let foodItems = getFoodItems();
 	let currentOrder = getCurrentOrder();
-	let sum = 0;
+	let sum = currentOrder.total;
 
 	function getOrderById(id: string) {
 		return browser ? cacheUtil.get(id) : null;
@@ -87,13 +87,13 @@
 
 	function onSubmit(direction: 'next' | 'previous' = 'next') {
 		saveOrder();
-		sum = 0;
 		const id = (+currentOrder.id + (direction === 'next' ? 1 : -1)).toString();
 		let nextOrder = getOrderById(id) || {
-			id: (+currentOrder.id + 1).toString(),
+            id: (+currentOrder.id + 1).toString(),
 			foodItems: [],
 			total: 0
 		};
+        sum = nextOrder.total;
 		currentOrder = nextOrder;
 	}
 
