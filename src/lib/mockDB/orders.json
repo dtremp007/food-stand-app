@@ -1,0 +1,29 @@
+[
+  {
+    "id": "1",
+    "Tacos": 1,
+    "Burritos": 0,
+    "Quesadillas": 3,
+    "Nachos": 0,
+    "Chips and Salsa": 1,
+    "total": 15.98
+  },
+  {
+    "id": "2",
+    "Tacos": 1,
+    "Burritos": 1,
+    "Quesadillas": 0,
+    "Nachos": 1,
+    "Chips and Salsa": 0,
+    "total": 0
+  },
+  {
+    "id": "3",
+    "Tacos": 0,
+    "Burritos": 0,
+    "Quesadillas": 1,
+    "Nachos": 0,
+    "Chips and Salsa": 0,
+    "total": 7.99
+  }
+]

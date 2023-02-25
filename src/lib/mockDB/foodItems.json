@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Tacos",
+        "price": 5.99
+    },
+    {
+        "name": "Burritos",
+        "price": 6.99
+    },
+    {
+        "name": "Quesadillas",
+        "price": 7.99
+    },
+    {
+        "name": "Nachos",
+        "price": 8.99
+    },
+    {
+        "name": "Chips and Salsa",
+        "price": 9.99
+    }
+]
